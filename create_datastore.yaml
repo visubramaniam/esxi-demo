@@ -15,7 +15,7 @@
       password: '{{ vcenter_password }}'
       datastore_name: '{{ datastore_name }}'
       datastore_type: '{{ datastore_type }}'
-      vmfs_device_name: ''
+      vmfs_device_name: '{{ vmfs_device_name }}'
       vmfs_version: 6
       esxi_hostname: '{{ inventory_hostname }}'
       state: present
