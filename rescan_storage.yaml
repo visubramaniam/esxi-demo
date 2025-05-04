@@ -1,0 +1,16 @@
+- name: VMWare rescan Storage
+  hosts: localhost
+  gather_facts: false
+  collections:
+    - vmware.vmware
+
+  vars_files:
+    - vmware_vars.yaml
+
+- name: Rescan HBA's for a given ESXi host and refresh storage system objects
+  vmware_host_scanhba:
+      hostname: '{{ vcenter_hostname }}'
+      username: '{{ vcenter_username }}'
+      password: '{{ vcenter_password }}'
+      esxi_hostname: '{{ inventory_hostname }}'
+      refresh_storage: true
