@@ -18,12 +18,12 @@
       username: "{{ vault_storage_username }}"
       password: "{{ vault_storage_secret }}"
   tasks:
-  - name: Present ldevs to hostgroup CL1A
+  - name: Present ldevs to hostgroup CL2A
     hitachivantara.vspone_block.vsp.hv_hg:
       connection_info: "{{ connection_info }}"
       storage_system_info:
         serial: "{{ storage_serial }}"
-      state: "{{ state_present }}"
+      state: "present"
       spec:
         state: "present"
         name: "{{hostgroup_name_2}}"
