@@ -2,7 +2,7 @@
   hosts: localhost
   gather_facts: false
   collections:
-    - vmware.vmware
+    - community.vmware
 
   vars_files:
     - vmware_vars.yaml
