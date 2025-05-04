@@ -8,7 +8,7 @@
     - hitachivantara.vspone_block.vsp
 
   vars_files:
-    - ansible_vault_storage_var.yaml
+    - ansible_vault_storage.yaml
     - vsp_direct_variables.yaml
 
   vars:
