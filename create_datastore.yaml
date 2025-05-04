@@ -17,5 +17,6 @@
       datastore_type: '{{ datastore_type }}'
       vmfs_device_name: '{{ vmfs_device_name }}'
       vmfs_version: 6
+      validate_certs: no
       esxi_hostname: '{{ inventory_hostname }}'
       state: present
