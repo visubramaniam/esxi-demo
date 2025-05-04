@@ -1,0 +1,22 @@
+####################################################################
+# Variables for hostgroup playbook
+####################################################################
+# Task 1 : Create hostgroup for CL1-A
+####################################################################
+hostgroup_name_1 : DC3-ESXi-221
+hostgroup_port_1 : CL1-A
+hostgroup_host_mode_1 : VMWARE_EXTENSION
+hostgroup_host_mode_options_1 : [ 54, 63 ]
+hostgroup_ldevs_1 : [ 936 ]
+hostgroup_wwns_1 :
+  - 100000109B1D9128
+####################################################################
+# Task 2 : Create hostgroup for CL1-A
+####################################################################
+hostgroup_name_1 : DC3-ESXi-221
+hostgroup_port_1 : CL2-A
+hostgroup_host_mode_1 : VMWARE_EXTENSION
+hostgroup_host_mode_options_1 : [ 54, 63 ]
+hostgroup_ldevs_1 : [ 936 ]
+hostgroup_wwns_1 :
+  - 100000109B1D9129
