@@ -13,5 +13,6 @@
       hostname: '{{ vcenter_hostname }}'
       username: '{{ vcenter_username }}'
       password: '{{ vcenter_password }}'
+      validate_certs: no
       esxi_hostname: '{{ inventory_hostname }}'
       refresh_storage: true
