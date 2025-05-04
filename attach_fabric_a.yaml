@@ -8,8 +8,8 @@
     - hitachivantara.vspone_block.vsp
 
   vars_files:
-    - ../ansible_vault_vars/ansible_vault_storage_var.yml
-    - vsp_direct_variables.yml
+    - ansible_vault_storage_var.yaml
+    - vsp_direct_variables.yaml
 
   vars:
     # Common connection info for all tasks
