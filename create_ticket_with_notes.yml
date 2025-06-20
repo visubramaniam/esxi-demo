@@ -20,7 +20,7 @@
       data:
         severity: "{{ sn_severity }}"
         priority: "{{ sn_priority }}"
-        short_description: "Requested for creation of{{ datastore_name }} backed by ldev {{ hostgroup_ldevs_1 }} on {{ inventory_hostname }}"
+        short_description: "Requested for creation of '{{ datastore_name }}' backed by ldev '{{ hostgroup_ldevs_1 }}' on '{{ inventory_hostname }}'"
     register: new_incident
   - debug:
       var: new_incident.record
