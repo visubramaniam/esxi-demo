@@ -20,7 +20,7 @@
       data:
         severity: "{{ sn_severity }}"
         priority: "{{ sn_priority }}"
-        short_description: "Requested for creation of backed by hitachi ldev"
+        short_description: "Requested for creation of datastore backed by hitachi ldev"
     register: new_incident
   - debug:
       var: new_incident.record
