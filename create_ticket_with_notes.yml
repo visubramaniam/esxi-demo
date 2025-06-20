@@ -11,7 +11,7 @@
 
   tasks:
   - name: Create a change request
-    snow_record:
+    servicenow.servicenow.snow_record:
       state: present
       table: incident
       username: "{{ sn_username }}"
