@@ -4,10 +4,12 @@
   gather_facts: no
   connection: local
 
-  tasks:
-  - name: include vars
-    include_vars: change_request_vars.yml
+  vars_files:
+    - change_request_vars.yml
+    - vmware_vars.yml
+    - vsp_direct_variables.yml
 
+  tasks:
   - name: Create a change request
     snow_record:
       state: present
