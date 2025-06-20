@@ -13,7 +13,7 @@
   - name: Create a change request
     snow_record:
       state: present
-      table: change_request
+      table: incident
       username: "{{ sn_username }}"
       password: "{{ sn_password }}"
       instance: "{{ sn_instance }}"
