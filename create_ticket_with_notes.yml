@@ -24,3 +24,8 @@
     register: new_incident
   - debug:
       var: new_incident.record
+  
+  - name: "Set INC for workflow"
+    set_stats:
+      data:
+        inc_number: "{{ new_incident.record.number }}"

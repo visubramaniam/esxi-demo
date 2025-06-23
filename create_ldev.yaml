@@ -33,17 +33,17 @@
           size: "{{ ldev_size }}GB"
           capacity_saving: "compression_deduplication"
           data_reduction_share: "true"
-          name: "William"
+          name: "Demo"
       register: ldev_create
 
-
-    - debug:
+    - name: "Show ldev_create output"
+      ansible.builtin.debug:
         var: ldev_create
 
     - name: "Set ldev_id for workflow"
       set_stats:
         data:
-          ldev_id:  "{{ ldev_create.volume.ldev_id }}"
+          ldev_id: "{{ ldev_create.volume.ldev_id }}"
 
     - name: "Set NAA for workflow"
       set_stats:
