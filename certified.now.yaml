@@ -1,16 +1,17 @@
 plugin: servicenow.itsm.now
-inventory_hostname_source: host_name
+inventory_hostname_source: name
 columns:
   - name: sys_id
     primary_key: true
   - name: host_name
+  - name: name
   - name: ip_address
   - name: os
   - name: classification
   - name: name
   - name: fqdn
 compose:
-  ansible_host: host_name
+  ansible_host: name
   ip_addr: ip_address
 keyed_groups:
   - key: os
