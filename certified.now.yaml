@@ -1,9 +1,8 @@
 plugin: servicenow.itsm.now
-inventory_hostname_source: name
+inventory_hostname_source: host_name
 columns:
   - name: sys_id
     primary_key: true
-  - name: host_name
   - name: name
   - name: ip_address
   - name: os
