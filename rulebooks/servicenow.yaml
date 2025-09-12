@@ -2,11 +2,12 @@
 - name: ServiceNow Incident Automation
   hosts: localhost
   sources:
-    - name: servicenow_events
-      servicenow.eda.event_driven_ansible_notification_service:
-        webhook_url: "https://teaap-aap.apps.teocp.ecoe.io/eda-event-streams/api/eda/v1/external_event_stream/c67ce80a-077e-423c-a6d1-37352fe15d00/post/"
+    - ansible.eda.webhook:
+        host: 0.0.0.0
+        port: 5000 # Custom port
   rules:
     - name: New Incident
+      condition: event.table_name == "incident" and event.state == "1"
       action:
         run_job_template:
           name: "rescan_storage.yaml"
