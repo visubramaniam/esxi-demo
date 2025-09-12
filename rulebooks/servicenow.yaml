@@ -8,7 +8,7 @@
   rules:
     - name: New Incident
       condition:
-           event.meta.headers is defined
+        event.meta.headers is defined
       action:
         run_job_template:
           name: "rescan_storage"
