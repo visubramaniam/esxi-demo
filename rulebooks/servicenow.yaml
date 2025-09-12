@@ -9,8 +9,8 @@
     - name: New Incident
       condition:
         all:
-          - event.category == "hardware"
-          - event.state == "6"
+          - event.payload.category == "hardware"
+          - event.payload.state == "6"
       action:
         run_job_template:
           name: "rescan_storage.yaml"
