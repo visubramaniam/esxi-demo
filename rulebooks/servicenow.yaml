@@ -13,4 +13,3 @@
           organization: "Your_Organization"
           extra_vars:
             incident_number: "{{ event.number }}"
- 
