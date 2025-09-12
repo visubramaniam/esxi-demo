@@ -14,4 +14,3 @@
       action:
         run_job_template:
           name: "rescan_storage.yaml"
-          organization: "Hitachi Ltd"
