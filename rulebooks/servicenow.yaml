@@ -9,7 +9,7 @@
     - name: New Incident
       condition:
         all:
-          - event.table_name == "incident"
+          - event.category == "hardware"
           - event.state == "6"
       action:
         run_job_template:
