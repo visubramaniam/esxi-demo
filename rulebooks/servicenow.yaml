@@ -6,8 +6,7 @@
       servicenow.eda.event_driven_ansible_notification_service:
         webhook_url: "https://teaap-aap.apps.teocp.ecoe.io/eda-event-streams/api/eda/v1/external_event_stream/c67ce80a-077e-423c-a6d1-37352fe15d00/post/"
   rules:
-    - name: New Critical Incident
-      condition: event.table_name == "incident"
+    - name: New Incident
       action:
         run_job_template:
           name: "rescan_storage.yaml"
