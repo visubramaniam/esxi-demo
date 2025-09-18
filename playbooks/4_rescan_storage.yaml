@@ -14,5 +14,5 @@
       username: '{{ vcenter_username }}'
       password: '{{ vcenter_password }}'
       validate_certs: no
-      esxi_hostname: '{{ inventory_hostname }}'
+      esxi_hostname: 192.168.52.51
       refresh_storage: true
