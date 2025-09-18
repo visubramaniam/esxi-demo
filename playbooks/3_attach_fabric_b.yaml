@@ -32,7 +32,7 @@
         host_mode_options: "{{ hostgroup_host_mode_options_2 }}"
         ldevs: "{{ ldev_id }}"
         wwns:
-           - wwn: '"{{ hostgroup_wwns_2 }}"'
+           - wwn: "{{ hostgroup_wwns_2 }}"
     register: host_group_create
 
   - debug:
