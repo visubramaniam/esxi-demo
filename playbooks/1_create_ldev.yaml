@@ -15,7 +15,7 @@
       address: "{{ storage_address }}"
       username: "{{ vault_storage_username }}"
       password: "{{ vault_storage_secret }}"
-
+    ldev_size: 20
 
   tasks:
 
