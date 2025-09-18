@@ -28,8 +28,10 @@
         state: "present"
         name: "{{hostgroup_name_2}}"
         port: "{{hostgroup_port_2}}"
+        host_mode: VMWARE_EXTENSION
         host_mode_options: "{{ hostgroup_host_mode_options_2 }}"
         ldevs: "{{ ldev_id }}"
+        hostgroup_wwns: "{{ hostgroup_wwns_2 }}"
     register: host_group_create
 
   - debug:
