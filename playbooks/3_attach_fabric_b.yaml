@@ -18,7 +18,7 @@
       username: "{{ vault_storage_username }}"
       password: "{{ vault_storage_secret }}"
   tasks:
-    - name: Present ldevs to hostgroup CL4-A
+    - name: Present ldevs to hostgroup CL2-A
       hitachivantara.vspone_block.vsp.hv_hg:
         connection_info: "{{ connection_info }}"
         state: "present"
