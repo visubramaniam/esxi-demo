@@ -31,7 +31,8 @@
         host_mode: VMWARE_EXTENSION
         host_mode_options: "{{ hostgroup_host_mode_options_1 }}"
         ldevs: "{{ ldev_id }}"
-        wwns: ["{{ hostgroup_wwns_1 }}"]
+        wwns:
+          - wwn: '"{{ hostgroup_wwns_1 }}"'
     register: host_group_create
 
   - debug:
