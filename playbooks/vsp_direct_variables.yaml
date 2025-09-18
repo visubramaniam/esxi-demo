@@ -3,7 +3,7 @@
 ####################################################################
 # Task 1 : Create hostgroup for CL1-A
 ####################################################################
-hostgroup_name_1 : DC1-ESXi-N1
+hostgroup_name_1 : DC1-ESXi-Cluster
 hostgroup_port_1 : CL1-A
 hostgroup_host_mode_1 : VMWARE_EXTENSION
 hostgroup_host_mode_options_1 : [ 54, 63, 68, 91, 110, 114, 135 ]
@@ -11,7 +11,7 @@ hostgroup_wwns_1 : 1000B47AF1D2F1DB
 ####################################################################
 # Task 2 : Create hostgroup for CL2-A
 ####################################################################
-hostgroup_name_2 : DC1-ESXi-N1
+hostgroup_name_2 : DC1-ESXi-Cluster
 hostgroup_port_2 : CL2-A
 hostgroup_host_mode_2 : VMWARE_EXTENSION
 hostgroup_host_mode_options_2 : [ 54, 63, 68, 91, 110, 114, 135 ]
