@@ -19,4 +19,4 @@
       vmfs_version: 6
       validate_certs: no
       esxi_hostname: '{{ inventory_hostname }}'
-      state: present
+
