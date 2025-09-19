@@ -25,8 +25,8 @@
         storage_system_info:
           serial: "{{ storage_serial }}"
         spec:
-          name: "{{hostgroup_name_1}}"
-          port: "{{hostgroup_port_1}}"
+          name: "{{hostgroup_name_2}}"
+          port: "{{hostgroup_port_2}}"
           host_mode: VMWARE_EXTENSION
           host_mode_options: "{{ hostgroup_host_mode_options_1 }}"
           ldevs: "{{ ldev_id }}"
