@@ -4,19 +4,45 @@
   gather_facts: false
   collections:
     - community.vmware
+    - hitachivantara.vspone_block.vsp
 
   vars_files:
+    - ansible_vault_storage.yaml
     - vmware_vars.yaml
 
+  vars:
+    connection_info:
+      address: "{{ storage_address }}"
+      username: "{{ vault_storage_username }}"
+      password: "{{ vault_storage_secret }}"
+
   tasks:
-    # vmfs_device_name is produced by step 1 (set_stats) and reaches this
-    # playbook as an extra var when run inside the AAP workflow.
-    - name: Verify required variables are present
+    # ldev_id is produced by step 1 (set_stats) and reaches this playbook as an
+    # extra var when run inside the AAP workflow.
+    - name: Verify ldev_id is present
       ansible.builtin.assert:
         that:
-          - vmfs_device_name is defined
-          - vmfs_device_name | length > 0
-        fail_msg: "vmfs_device_name not set; run step 1 first (same AAP workflow) or pass it as an extra var."
+          - ldev_id is defined
+          - ldev_id | string | length > 0
+        fail_msg: "ldev_id not set; run step 1 first (same AAP workflow) or pass it as an extra var."
+
+    # The array only reports the NAA once the LDEV is mapped to a host group
+    # (steps 2 and 3), so it is looked up here rather than in step 1.
+    - name: Get LDEV details
+      hitachivantara.vspone_block.vsp.hv_ldev_facts:
+        connection_info: "{{ connection_info }}"
+        storage_system_info:
+          serial: "{{ storage_serial }}"
+        spec:
+          ldev_id: "{{ ldev_id | int }}"
+      register: ldev_facts
+      until: ldev_facts.ansible_facts.volumes[0].canonical_name | default('') | length > 0
+      retries: 6
+      delay: 10
+
+    - name: Set ESXi device name from NAA
+      ansible.builtin.set_fact:
+        vmfs_device_name: "{{ ldev_facts.ansible_facts.volumes[0].canonical_name | lower }}"
 
     # The VMFS volume is formatted once, from a single host. Creating it on
     # more than one host would attempt to re-format the device.

@@ -44,8 +44,3 @@
       set_stats:
         data:
           ldev_id: "{{ ldev_create.volume.ldev_id }}"
-
-    - name: "Set NAA for workflow"
-      set_stats:
-        data:
-          vmfs_device_name: "{{ ldev_create.volume.canonical_name }}"
