@@ -1,9 +1,6 @@
 ---
-# snow_record variables
+# sn_instance, sn_username and sn_password are injected by the AAP ServiceNow credential
 
-sn_username: vsubramaniam
-sn_password: E1nW0rtBr1cht
-sn_instance: ven02669
 
 # data variables
 

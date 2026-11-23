@@ -1,7 +1,7 @@
 ####################################################################
-# Example : LDEV  Playbook
+# Step 2 : Attach LDEV to hostgroup on CL1-A (fabric A)
 ####################################################################
-- name: Logical Device Module
+- name: Attach LDEV to fabric A hostgroup
   hosts: localhost
   gather_facts: false
   collections:
@@ -27,7 +27,7 @@
         spec:
           name: "{{hostgroup_name_1}}"
           port: "{{hostgroup_port_1}}"
-          host_mode: VMWARE_EXTENSION
+          host_mode: "{{ hostgroup_host_mode_1 }}"
           host_mode_options: "{{ hostgroup_host_mode_options_1 }}"
           ldevs: "{{ ldev_id }}"
       register: host_group_create

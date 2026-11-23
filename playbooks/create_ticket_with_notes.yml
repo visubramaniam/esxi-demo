@@ -1,31 +1,31 @@
 ---
-- name: Create ticket with notes
+- name: Create ServiceNow incident
   hosts: localhost
-  gather_facts: no
+  gather_facts: false
   connection: local
 
   vars_files:
     - change_request_vars.yml
-    - vmware_vars.yml
-    - vsp_direct_variables.yml
 
   tasks:
-  - name: Create a change request
-    servicenow.servicenow.snow_record:
-      state: present
-      table: incident
-      username: "{{ sn_username }}"
-      password: "{{ sn_password }}"
-      instance: "{{ sn_instance }}"
-      data:
-        severity: "{{ sn_severity }}"
-        priority: "{{ sn_priority }}"
-        short_description: "Requested for creation of datastore backed by hitachi ldev"
-    register: new_incident
-  - debug:
-      var: new_incident.record
-  
-  - name: "Set INC for workflow"
-    set_stats:
-      data:
-        inc_number: "{{ new_incident.record.number }}"
+    - name: Create an incident
+      servicenow.servicenow.snow_record:
+        state: present
+        table: incident
+        username: "{{ sn_username }}"
+        password: "{{ sn_password }}"
+        instance: "{{ sn_instance }}"
+        data:
+          severity: "{{ sn_severity }}"
+          priority: "{{ sn_priority }}"
+          short_description: "Requested for creation of datastore backed by hitachi ldev"
+      register: new_incident
+
+    - name: Show incident record
+      ansible.builtin.debug:
+        var: new_incident.record
+
+    - name: Set INC for workflow
+      ansible.builtin.set_stats:
+        data:
+          inc_number: "{{ new_incident.record.number }}"

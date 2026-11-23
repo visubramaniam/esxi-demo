@@ -1,6 +1,6 @@
 ---
 ####################################################################
-# Example : LDEV  Playbook
+# Step 1 : Create LDEV
 ####################################################################
 - name: Logical Device Module
   hosts: localhost
@@ -20,7 +20,7 @@
   tasks:
 
     ###########################################################################
-    # Task 7 : Create ldev with capacity saving and data_reduction_share
+    # Task 1 : Create ldev with capacity saving and data_reduction_share
     ###########################################################################
     - name: Create ldev with capacity saving and data_reduction_share
       hitachivantara.vspone_block.vsp.hv_ldev:

@@ -1,4 +1,5 @@
-- name: VMWare rescan Storage
+---
+- name: Rescan storage on ESXi cluster
   hosts: localhost
   gather_facts: false
   collections:
@@ -8,11 +9,11 @@
     - vmware_vars.yaml
 
   tasks:
-  - name: Rescan HBA's for a given ESXi host and refresh storage system objects
-    community.vmware.vmware_host_scanhba:
-      hostname: '{{ vcenter_hostname }}'
-      username: '{{ vcenter_username }}'
-      password: '{{ vcenter_password }}'
-      validate_certs: no
-      cluster_name: DC1-ESXi-Cluster
-      refresh_storage: true
+    - name: Rescan HBAs for all hosts in the cluster and refresh storage system objects
+      community.vmware.vmware_host_scanhba:
+        hostname: '{{ vcenter_hostname }}'
+        username: '{{ vcenter_username }}'
+        password: '{{ vcenter_password }}'
+        validate_certs: '{{ vcenter_validate_certs }}'
+        cluster_name: '{{ cluster_name }}'
+        refresh_storage: true

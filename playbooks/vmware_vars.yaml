@@ -1,6 +1,6 @@
-vcenter_hostname: 192.168.52.50
-vcenter_username: administrator@vsphere.local
-vcenter_password: Demo@G@D123
-inventory_hostname: dc1-esxi-n1.storage.idc.coe.hv
+# vcenter_hostname, vcenter_username and vcenter_password are injected by the AAP vCenter credential.
+esxi_hostname: dc1-esxi-n1.storage.idc.coe.hv
 datastore_name: Vinod-Demo
 datastore_type: vmfs
+cluster_name: DC1-ESXi-Cluster
+vcenter_validate_certs: false
