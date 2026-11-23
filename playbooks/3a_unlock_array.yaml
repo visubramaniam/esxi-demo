@@ -1,0 +1,30 @@
+---
+####################################################################
+# Step 3a : Unlock the array's resource groups after both hostgroup
+#           attachments (fabric A and B) are done.
+####################################################################
+- name: Unlock array resource groups
+  hosts: localhost
+  gather_facts: false
+  collections:
+    - hitachivantara.vspone_block.vsp
+
+  vars_files:
+    - ansible_vault_storage.yaml
+
+  tasks:
+    - name: Verify lock token is present
+      ansible.builtin.assert:
+        that:
+          - lock_token is defined
+          - lock_token | length > 0
+        fail_msg: "lock_token not set; run 0_lock_array.yaml first in the same AAP workflow."
+
+    - name: Unlock resource groups
+      hitachivantara.vspone_block.vsp.hv_resource_group_lock:
+        connection_info:
+          address: "{{ storage_address }}"
+          api_token: "{{ lock_token }}"
+        storage_system_info:
+          serial: "{{ storage_serial }}"
+        state: absent

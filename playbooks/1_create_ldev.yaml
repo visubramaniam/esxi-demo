@@ -11,10 +11,12 @@
 
   vars:
     # Common connection info for all tasks
-    connection_info:
-      address: "{{ storage_address }}"
-      username: "{{ vault_storage_username }}"
-      password: "{{ vault_storage_secret }}"
+    # lock_token is produced by 0_lock_array.yaml (set_stats) in the AAP workflow.
+    # When present, it replaces username/password for operations on locked resources.
+    connection_info: >-
+      {{ {'address': storage_address} | combine(
+           {'api_token': lock_token} if lock_token is defined
+           else {'username': vault_storage_username, 'password': vault_storage_secret}) }}
     ldev_size: 20
 
   tasks:

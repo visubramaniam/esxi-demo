@@ -1,0 +1,43 @@
+---
+####################################################################
+# Step 0 : Lock the array's resource groups before provisioning
+####################################################################
+- name: Lock array resource groups
+  hosts: localhost
+  gather_facts: false
+  collections:
+    - hitachivantara.vspone_block.vsp
+
+  vars_files:
+    - ansible_vault_storage.yaml
+
+  vars:
+    connection_info:
+      address: "{{ storage_address }}"
+      username: "{{ vault_storage_username }}"
+      password: "{{ vault_storage_secret }}"
+    # The lock expires on its own after this many seconds (0-7200), so a
+    # failed workflow cannot hold the array indefinitely.
+    lock_timeout_sec: 900
+
+  tasks:
+    - name: Lock resource groups
+      hitachivantara.vspone_block.vsp.hv_resource_group_lock:
+        connection_info: "{{ connection_info }}"
+        storage_system_info:
+          serial: "{{ storage_serial }}"
+        state: present
+        spec:
+          lock_timeout_sec: "{{ lock_timeout_sec }}"
+      register: lock_result
+      # Wait out a lock held by another session.
+      until: >-
+        lock_result is not failed or
+        'locked by a different user' not in (lock_result.msg | default(''))
+      retries: 10
+      delay: 30
+
+    - name: Pass lock token to later workflow steps
+      ansible.builtin.set_stats:
+        data:
+          lock_token: "{{ lock_result.locked_resource_groups.lock_token }}"
