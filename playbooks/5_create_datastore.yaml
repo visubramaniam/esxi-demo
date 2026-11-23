@@ -40,9 +40,11 @@
       retries: 6
       delay: 10
 
+    # The array returns the bare NAA; ESXi names the device "naa.<id>".
     - name: Set ESXi device name from NAA
       ansible.builtin.set_fact:
-        vmfs_device_name: "{{ ldev_facts.ansible_facts.volumes[0].canonical_name | lower }}"
+        vmfs_device_name: >-
+          {{ 'naa.' ~ (ldev_facts.ansible_facts.volumes[0].canonical_name | lower | regex_replace('^naa\.', '')) }}
 
     # The VMFS volume is formatted once, from a single host. Creating it on
     # more than one host would attempt to re-format the device.
