@@ -31,6 +31,12 @@
           host_mode_options: "{{ hostgroup_host_mode_options_1 }}"
           ldevs: "{{ ldev_id }}"
       register: host_group_create
+      # Retry only when another session holds the array's resource lock.
+      until: >-
+        host_group_create is not failed or
+        'locked by a different user' not in (host_group_create.msg | default(''))
+      retries: 5
+      delay: 30
 
     - name: Show host group creation result
       ansible.builtin.debug:

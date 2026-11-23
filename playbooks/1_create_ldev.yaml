@@ -35,6 +35,12 @@
           data_reduction_share: "true"
           name: "Demo"
       register: ldev_create
+      # Retry only when another session holds the array's resource lock.
+      until: >-
+        ldev_create is not failed or
+        'locked by a different user' not in (ldev_create.msg | default(''))
+      retries: 5
+      delay: 30
 
     - name: "Show ldev_create output"
       ansible.builtin.debug:
