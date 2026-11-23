@@ -6,3 +6,6 @@
 
 sn_severity: 2
 sn_priority: 2
+
+# Who gets the incident e-mail notification (must match a sys_user e-mail in ServiceNow)
+sn_notify_email: vinod.subramaniam@hitachivantara.com

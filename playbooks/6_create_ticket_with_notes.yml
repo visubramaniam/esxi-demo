@@ -18,6 +18,25 @@
           - vmfs_device_name | length > 0
         fail_msg: "datastore_name / vmfs_device_name not set; run this after step 5 in the same AAP workflow."
 
+    # Notify is e-mailed to the caller and watch list, so find the user's sys_id.
+    - name: Look up notification recipient
+      servicenow.itsm.api_info:
+        instance:
+          host: "https://{{ sn_instance }}.service-now.com"
+          username: "{{ sn_username }}"
+          password: "{{ sn_password }}"
+        resource: sys_user
+        sysparm_query: "email={{ sn_notify_email }}"
+        columns:
+          - sys_id
+          - email
+      register: notify_user
+
+    - name: Verify recipient exists in ServiceNow
+      ansible.builtin.assert:
+        that: notify_user.record | length > 0
+        fail_msg: "No ServiceNow user with e-mail {{ sn_notify_email }}."
+
     - name: Create an incident
       servicenow.servicenow.snow_record:
         state: present
@@ -27,6 +46,9 @@
         instance: "{{ sn_instance }}"
         data:
           severity: "{{ sn_severity }}"
+          notify: 3  # 1 = Do Not Notify, 2 = Telephone, 3 = Email
+          caller_id: "{{ notify_user.record[0].sys_id }}"
+          watch_list: "{{ notify_user.record[0].sys_id }}"
           priority: "{{ sn_priority }}"
           short_description: "Datastore {{ datastore_name }} created on Hitachi LDEV"
           description: |-
