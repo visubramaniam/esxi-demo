@@ -69,3 +69,10 @@
         validate_certs: '{{ vcenter_validate_certs }}'
         cluster_name: '{{ cluster_name }}'
         refresh_storage: true
+
+    # Hand the results to later workflow nodes (e.g. the ServiceNow ticket).
+    - name: Set datastore details for workflow
+      ansible.builtin.set_stats:
+        data:
+          datastore_name: "{{ datastore_name }}"
+          vmfs_device_name: "{{ vmfs_device_name }}"
