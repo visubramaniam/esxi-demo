@@ -35,7 +35,7 @@
           size: "{{ ldev_size }}GB"
           capacity_saving: "compression_deduplication"
           data_reduction_share: "true"
-          name: "Demo"
+          name: "Federal-Demo"
       register: ldev_create
       # Retry only when another session holds the array's resource lock.
       until: >-
