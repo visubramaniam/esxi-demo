@@ -46,7 +46,7 @@
         instance: "{{ sn_instance }}"
         data:
           severity: "{{ sn_severity }}"
-          notify: 3  # 1 = Do Not Notify, 2 = Telephone, 3 = Email
+          notify: 2  # 1 = Do Not Notify, 2 = Email, 3 = Telephone
           caller_id: "{{ notify_user.record[0].sys_id }}"
           watch_list: "{{ notify_user.record[0].sys_id }}"
           priority: "{{ sn_priority }}"
